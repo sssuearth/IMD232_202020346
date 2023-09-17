@@ -5,10 +5,9 @@ function setup() {
 
 function draw() {
   background('#FFF4D9');
-  //루프로 인해 아래서 적용한 설정이 타고 넘어오는 것을 방지하기 위해 초기화
+  //초기화, 설정값
   rectMode(CORNER);
   colorMode(RGB); //컬러
-  stroke(0); //선 기본 존재
   strokeWeight(1); //선 두께
 
   //바닥
@@ -60,11 +59,6 @@ function draw() {
   rect(231, 104, 52, 30, 20, 0, 0, 20); //오른쪽 끝 잘린구름
   rect(208, 123, 52, 22, 20); //그아래 구름
   rect(210, 170, 49, 16, 20);
-
-  stroke(0);
-  //사각형을 원과 같은 방식으로 좌표 중앙을 기준으로 그리기
-  // rect(400, 100, 50, 25);
-  // ellipse(400, 100, 25, 50);
 
   //벽 액자
   stroke('#316BFF'); //선 색상
@@ -144,8 +138,10 @@ function draw() {
   ellipse(257, 381, 14, 14); //2
   ellipse(335, 381, 14, 14); //3
 
-  //쿠션
+  //쿠션 모서리 둥글게 불가능
   // quad(120, 410, 182, 415, 194, 460, 124, 467, 30);
+
+  //쿠션 2개
   fill('#BAD1FF'); //블루
   stroke('#316BFF'); //선 색상
   rect(193, 407, 110, 46, 50); //사각 쿠션
@@ -153,4 +149,13 @@ function draw() {
   fill('#FFF6A2'); //옐로우
   ellipse(157, 428, 96, 77); //원 쿠션 밖
   ellipse(157, 428, 78, 60); //원 쿠션 안
+
+  //액자 속 꽃
+  fill('#FFC0ED'); //안쪽핑크
+  translate(501, 153);
+  noStroke();
+  for (let i = 0; i < 10; i++) {
+    ellipse(0, 3, 8, 30);
+    rotate(PI / 5);
+  }
 }
