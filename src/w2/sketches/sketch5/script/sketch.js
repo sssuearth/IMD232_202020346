@@ -1,8 +1,13 @@
 function setup() {
-  createCanvas(500, 500);
+  let canvas;
+  canvas = createCanvas(400, 300);
+  let canvasParent;
+  canvasParent = select('#canvas-goes-here');
+  canvas.parent(canvasParent);
+  background(255);
 }
 
 function draw() {
-  background(255);
-  circle(mouseX, mouseY, 100);
+  background(255, 0, 0);
+  circle(mouseX, mouseY, 50);
 }
