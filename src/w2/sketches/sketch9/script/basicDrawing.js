@@ -153,3 +153,4 @@ function draw() {
   fill('#FFF6A2'); //옐로우
   ellipse(157, 428, 96, 77); //원 쿠션 밖
   ellipse(157, 428, 78, 60); //원 쿠션 안
+}
