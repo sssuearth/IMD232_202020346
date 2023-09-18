@@ -1,8 +1,7 @@
 function setup() {
-  setCanvasContainer('p5-canvas', 600, 600);
+  setCanvasContainer('p5-canvas', 600, 600, true);
   background('white');
 }
-//, true
 
 function draw() {
   background('#FFF4D9');
@@ -10,10 +9,6 @@ function draw() {
   rectMode(CORNER);
   colorMode(RGB); //컬러
   strokeWeight(1); //선 두께
-
-  //카펫
-  fill('#CCEDFF'); //노란색
-  quad(68, 500, 532, 500, 587, 600, 12, 600);
 
   //문
   stroke('#316BFF'); //선 색상
@@ -94,6 +89,20 @@ function draw() {
   //rect(0, 470, 600, 130);
   rect(0, height / 1.28, width * 1, height / 4.615);
 
+  //카펫
+  fill('#CCEDFF'); //노란색
+  // quad(68, 500, 532, 500, 587, 600, 12, 600);
+  quad(
+    width / 8.823,
+    height / 1.2,
+    width / 1.127,
+    height / 1.2,
+    width / 1.022,
+    height * 1,
+    width / 50,
+    height * 1
+  );
+
   //벽 액자
   // stroke('#316BFF'); //선 색상
   // fill('#D4FAFF'); //노란색
@@ -105,6 +114,17 @@ function draw() {
   // rect(551, 59, 67, 88, 3);
   // fill('#FFDCF9'); //안쪽핑크
   // rect(561, 68, 47, 69, 3);
+
+  stroke('#316BFF'); //선 색상
+  fill('#D4FAFF'); //노란색
+  rect(width / 1.265, height / 5.172, width / 10.9, height / 8.3, 3);
+  fill('#FFFCBE'); //안쪽블루
+  rect(width / 1.244, height / 4.838, width / 15.78, height / 10.714, 3);
+
+  fill('#CBECFF'); //파란색
+  rect(width / 1.088, height / 10.16, width / 8.955, height / 6.81, 3);
+  fill('#FFDCF9'); //안쪽핑크
+  rect(width / 1.069, height / 8.823, width / 12.76, height / 8.695, 3);
 
   //천장조명
   stroke('#316BFF'); //선 색상
@@ -217,22 +237,45 @@ function draw() {
   line(width / 1.724, height / 1.6304, width / 1.863, height / 1.5228); //2-2
 
   //소파 꾸밈 단추_원
-  ellipse(179, 381, 14); //1
-  ellipse(257, 381, 14); //2
-  ellipse(335, 381, 14); //3
-  // ellipse(width / 3.351, heigh / 1.574, width / 42.85); //1
-  // ellipse(width / 2.334, heigh / 1.574, width / 42.85); //2
-  // ellipse(width / 1.791, heigh / 1.574, width / 42.85); //3
+  // ellipse(179, 381, 14); //1
+  // ellipse(257, 381, 14); //2
+  // ellipse(335, 381, 14); //3
+  ellipse(width / 3.351, height / 1.574, width / 42.85); //1
+  ellipse(width / 2.334, height / 1.574, width / 42.85); //2
+  ellipse(width / 1.791, height / 1.574, width / 42.85); //3
 
   //쿠션 모서리 둥글게 불가능
   // quad(120, 410, 182, 415, 194, 460, 124, 467, 30);
 
   //쿠션 2개
+  // fill('#BAD1FF'); //블루
+  // stroke('#316BFF'); //선 색상
+  // rect(193, 407, 110, 46, 50); //눕혀진 원 쿠션
+  // rect(192, 425, 115, 7, 50); //눕혀진 원 쿠션 세로
+  // fill('#FFF6A2'); //옐로우
+  // ellipse(157, 428, 96, 77); //원 쿠션 밖
+  // ellipse(157, 428, 78, 60); //원 쿠션 안
   fill('#BAD1FF'); //블루
   stroke('#316BFF'); //선 색상
-  rect(193, 407, 110, 46, 50); //사각 쿠션
-  rect(192, 425, 115, 7, 50); //사각 쿠션
+  rect(width / 3.108, height / 1.474, width / 5.45, height / 13.04, 50); //눕혀진 원 쿠션
+  rect(width / 3.108, height / 1.411, width / 5.217, height / 85.714, 50); //눕혀진 원 쿠션 세로
   fill('#FFF6A2'); //옐로우
-  ellipse(157, 428, 96, 77); //원 쿠션 밖
-  ellipse(157, 428, 78, 60); //원 쿠션 안
+  ellipse(width / 3.821, height / 1.4018, width / 6.25, height / 7.792); //원 쿠션 밖
+  ellipse(width / 3.821, height / 1.4018, width / 7.69, height / 10); //원 쿠션 안
+
+  //액자 속 꽃
+  //   fill('#FFC0ED'); //안쪽핑크
+  //   translate(501, 153);
+  //   noStroke();
+  //   for (let i = 0; i < 10; i++) {
+  //     ellipse(0, 3, 8, 30);
+  //     rotate(PI / 5);
+  // }
+  fill('#FFC0ED'); //안쪽핑크
+  translate(width / 1.197, height / 3.921);
+  noStroke();
+  for (let i = 0; i < 10; i++) {
+    ellipse(0, height / 200, width / 75, height / 20);
+    rotate(PI / 5);
+  }
 }
