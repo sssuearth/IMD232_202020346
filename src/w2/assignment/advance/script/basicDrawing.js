@@ -5,7 +5,6 @@
 function setup() {
   createCanvas(600, 600);
   background('white');
-  line(0, 0, width, height);
 }
 
 function draw() {

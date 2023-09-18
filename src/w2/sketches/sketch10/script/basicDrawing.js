@@ -1,12 +1,17 @@
-// function setup() {
-//   setCanvasContainer('p5-canvas', 600, 600);
-//   background('white');
-
 function setup() {
-  createCanvas(600, 600);
+  setCanvasContainer('p5-canvas', 600, 600);
   background('white');
-  line(0, 0, width, height);
 }
+
+// function setup() {
+//   createCanvas(600, 600);
+//   background('white');
+// }
+
+// function setup() {
+//   createCanvas(600, 600);
+//   background(255, 0, 200);
+// }
 
 function draw() {
   background('#FFF4D9');
@@ -14,6 +19,8 @@ function draw() {
   rectMode(CORNER);
   colorMode(RGB); //컬러
   strokeWeight(1); //선 두께
+
+  // width*
 
   //바닥
   stroke('#316BFF'); //선 색상
