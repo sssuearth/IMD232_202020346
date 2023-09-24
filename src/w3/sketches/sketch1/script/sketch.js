@@ -1,24 +1,42 @@
-let posX;
-let posY;
-let posXAdd = 3;
-let posYAdd = -2;
+//원의 위치 변수
+let x;
+let y;
+//방향성을 갖는 속도
+let velocityX = 5;
+let velocityY = 3;
 
 function setup() {
-  setCanvasContainer('mySketchGoesHere', 3, 2, true);
-  background(255);
-  posX = width / 2; //원의 위치를 화면 너비 중앙
-  posY = height / 2; //원의 위치를 화면 높이 중앙
-  ellipse(posX, posY, 50);
+  setCanvasContainer('canvas', 3, 2, true);
+  background('white');
+
+  //화면 너비의 중앙
+  x = width / 2.0;
+  y = height / 2.0;
 }
 
 function draw() {
-  background(255);
-  //계산하는 것을 먼저하고 도형을 그리기
-  posX += posXAdd;
-  posY += posYAdd;
-  ellipse(posX, posY, 50);
+  background('white');
+  x += velocityX;
+  y += velocityY;
+  ellipse(x, y, 50);
 
-  // posX++;
-  // posX = posX + 1;
-  // posX += 1;
+  //공이 벽에 부딪히는 순간 튕기기
+  // if (x < 0) {
+  //   velocityX *= -1;
+  // } else if (x > width) {
+  //   velocityX *= -1;
+  // }
+
+  // if (y < 0) {
+  //   velocityY *= -1;
+  // } else if (y > height) {
+  //   velocityY *= -1;
+  // }
+
+  if (x < 0 || x > width) {
+    velocityX *= -1;
+  }
+  if (y < 0 || y > height) {
+    velocityY *= -1;
+  }
 }
