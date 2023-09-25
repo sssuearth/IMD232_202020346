@@ -4,7 +4,7 @@ let acc; //가속도
 let mv; //마우스로 뻗어가는 벡터
 
 function setup() {
-  setCanvasContainer('canvas', 3, 3, true);
+  setCanvasContainer('canvas', 1, 1, true);
   background('white');
 
   pos = createVector(random(width), random(height));

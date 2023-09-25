@@ -5,7 +5,7 @@ let mouse;
 let centerToMouse;
 
 function setup() {
-  setCanvasContainer('canvas', 3, 3, true);
+  setCanvasContainer('canvas', 1, 1, true);
   background('white');
   pos = createVector(random(width), random(height));
   vel = createVector(0, 0);
@@ -38,6 +38,7 @@ function display() {
   noStroke();
   ellipse(pos.x, pos.y, 70);
 
+  // CornflowerBlue / 원에서 마우스로 향하는 선
   stroke('CornflowerBlue');
   strokeWeight(3);
   line(pos.x, pos.y, mouseX, mouseY);
