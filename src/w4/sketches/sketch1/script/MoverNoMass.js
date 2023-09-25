@@ -8,10 +8,10 @@ class MoverNoMass {
     //r=radius 저장해놓을 실질적인 칸, 위랑 다름
   }
 
-  //위치 업데이트
+  //위치 업데이트 / 등가속 운동
   update() {
-    this.vel.add(this.acc);
-    this.pos.add(this.vel);
+    this.vel.add(this.acc); //속도에 가속도를 더해준다
+    this.pos.add(this.vel); //포지션(위치)에 속도를 더해준다
   }
 
   //공이 통통 튕기는 묘사
