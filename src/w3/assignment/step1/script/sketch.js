@@ -9,7 +9,7 @@ function setup() {
 
   pos = createVector(random(width), random(height));
   vel = createVector(0, 0); //속도
-  acc = p5.Vector.random2D(); //가속도 랜덤
+  acc = p5.Vector.random2D(); //가속도랜덤
   mv = createVector();
 }
 

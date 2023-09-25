@@ -28,7 +28,7 @@ function update() {
   acc = centerToMouse;
 
   vel.add(acc);
-  vel.limit(8); // 설정값 이상 커지지 않게 상한선 / W3 Sketch12
+  vel.limit(8); // 설정값 이상 커지지 않게 상한선 /W3 Sketch12
   pos.add(vel);
 }
 

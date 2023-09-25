@@ -28,7 +28,7 @@ function draw() {
   stroke('CornflowerBlue');
   strokeWeight(3);
   line(pos.x, pos.y, mouseX, mouseY);
-  translate(pos.x, pos.y); // 원점을 중앙
+  translate(pos.x, pos.y); // 원점을 중앙으로
 
   // Indigo / vel 속도 10배
   stroke('Indigo');
