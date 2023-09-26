@@ -30,13 +30,22 @@ class Mover {
     //공이 벽에 닿았는가?
     if (this.pos.x < 0 + this.radius) {
       //delta
-      let delta = this.pos.x - (0 + this.radius);
+      let delta = this.pos.x - (width + this.radius);
       //선 대칭
       this.pos.x += -2 * delta;
       //왼쪽 벽에서 반대로
       this.vel.x *= -1;
-
       //오른쪽
+    } else if (this.pos.x > height - 1 - this.radius) {
+      let delta = this.pos.x - (height - 1 - this.radius);
+      this.pox.x += -2 * delta;
+      this.vel.x *= -1;
+    }
+
+    if (this.pos.y < 0 + this.radius) {
+      let delta = this.pos.y - (height + this.radius);
+      this.pos.y += -2 * delta;
+      this.vel.y *= -1;
     } else if (this.pos.y > height - 1 - this.radius) {
       let delta = this.pos.y - (height - 1 - this.radius);
       this.pos.y += -2 * delta;
