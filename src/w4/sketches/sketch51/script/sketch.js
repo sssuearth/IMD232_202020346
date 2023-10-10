@@ -26,15 +26,16 @@ function draw() {
   //   ball2.applyForce(wind);
   // }
 
-  let force1 = att.attract(ball);
-  ball.applyForce(force1);
-  let force2 = att.attract(ball2);
-  ball2.applyForce(force2);
+  // ball.applyForce(force1);
+  // ball2.applyForce(force2);
+  ball.applyForce(att.attract(ball));
+  ball2.applyForce(att.attract(ball2));
   ball.update();
   ball2.update();
 
   // ball.edgeBounce();
   // ball2.edgeBounce();
+  background('salmon');
 
   fill('white');
   ball.display();

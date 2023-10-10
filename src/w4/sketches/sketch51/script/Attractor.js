@@ -1,5 +1,5 @@
 class Attractor {
-  constructor() {
+  constructor(x, y, mass) {
     //계산을 위해 위치, 질량이 필요
     this.pos = createVector(x, y); //위치에 초기값
     this.mass = mass; //질량
