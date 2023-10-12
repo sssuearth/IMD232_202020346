@@ -1,6 +1,8 @@
 function setup() {
   setCanvasContainer('canvas', 3, 2, true);
-  background('white');
+  background(255);
 }
 
-function draw() {}
+function draw() {
+  background(255);
+}
