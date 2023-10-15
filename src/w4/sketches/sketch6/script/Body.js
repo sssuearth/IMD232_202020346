@@ -1,8 +1,8 @@
 class Body {
   constructor(x, y) {
     this.position = createVector(x, y);
-    this.velocity = createVector(0, 0);
-    this.acceleration = createVector(0, 0);
+    this.velocity = createVector(0, 0); //vel
+    this.acceleration = createVector(0, 0); //acc
     this.mass = random(16, 100); //랜덤
     this.radius = map(this.mass, 16, 100, 20, 50);
     this.velocityVisualization = createVector(0, 0);
