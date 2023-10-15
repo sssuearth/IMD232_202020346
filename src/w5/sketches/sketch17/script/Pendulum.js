@@ -16,6 +16,10 @@ class Pendulum {
     this.isDragging = false;
   }
 
+  applyForce(force) {
+    this.angleAcc = (sin(this.angle - (TAU / 360) * 90) * -force.y) / this.rad;
+  }
+
   applyGravity(gravity) {
     this.angleAcc =
       (sin(this.angle - (TAU / 360) * 90) * -gravity.y) / this.length;
