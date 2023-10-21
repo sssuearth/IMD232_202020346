@@ -33,14 +33,16 @@ class Ball {
 
   //함수는 동사, 명사 형태로 set- get-
   //상태를 물어볼때 is-
-  //화면에서 벗어나면=죽으면 신경 안씀
 
+  //원이 화면 밖으로 벗어나면 없어지는 함수 = 죽으면 신경 안씀
   isDead() {
+    // this.pos.x가 0+ this.rad 보다 크다는 것은 화면 안에 있다는 것
+    // if (this.pos.x >= 0 + this.rad)
     return (
       this.pos.x < -this.rad ||
-      this.pos.x > -width + this.rad ||
+      this.pos.x > width + this.rad ||
       // this.pos.y < -this.rad || //위로나가는 볼들은 제외
-      this.pos.y > -height + this.rad
+      this.pos.y > height + this.rad
     );
   }
 }

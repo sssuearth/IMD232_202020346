@@ -3,7 +3,7 @@ let particle;
 let g;
 
 function setup() {
-  setCanvasContainer('canvasGoesHere', 2, 1, true);
+  setCanvasContainer('canvas', 2, 1, true);
 
   background(255);
 
