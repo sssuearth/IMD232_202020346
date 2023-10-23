@@ -9,14 +9,14 @@ function setup() {
   traffic = new Traffic();
 
   for (let n = 0; n < 20; n++) {
-    traffic.addVehicle(radom(width), random(height));
+    traffic.addVehicle(random(width), random(height));
   }
 
   background(0, 100, 100);
 }
 
 function draw() {
-  background(0, 100, 10);
+  background(0, 100, 100);
   traffic.run();
 }
 

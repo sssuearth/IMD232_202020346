@@ -7,7 +7,6 @@ class Vehicle {
     this.acc = createVector(); //가속도 운동, 매번 속도가 얼마나 변하나?
     this.mass = 1; //질량
     this.rad = rad; //원, 화면에 표시하기 위한 크기개념
-    this.color = color;
     this.speedMx = speedMx; //최고속도
     this.forceMx = forceMx; //적용할 수 있는 힘의 최대치
     this.color = color;
@@ -19,8 +18,11 @@ class Vehicle {
 
   seek(target) {
     //타켓에게서 나의 위치를 빼기
+
     //target.sub(this.pos);
     let desired = p5.Vector.sub(target, this.pos);
+    // desired.normalize();
+    // desired.mult(this.speedMx);
     desired.setMag(this.speedMx);
     let steering = p5.Vector.sub(desired, this.vel);
 
@@ -34,9 +36,8 @@ class Vehicle {
       line(0, 0, steering.x * 10, steering.y * 10);
       pop();
     }
-    desired.sub(this.vel);
     steering.limit(this.forceMx);
-    this.applyForce(desired);
+    this.applyForce(steering);
   }
 
   //힘 적용
@@ -45,8 +46,8 @@ class Vehicle {
   //힘을 나의 질량으로 나눈다
   //변수가 아닌 상황에서 const 써주기
   applyForce(force) {
-    //force.div(this.mass);
-    let acc = p5.Vector.div(force, this.mass);
+    // force.div(this.mass);
+    let calcedAcc = p5.Vector.div(force, this.mass);
     this.acc.add(calcedAcc);
   }
 
@@ -62,8 +63,8 @@ class Vehicle {
   display() {
     //const headingAngle = atan2(this.vel.y, this.vel.x);
     // heading으로 각도
-
     let angle = this.vel.heading();
+
     push();
     translate(this.pos.x, this.pos.y); //원점이 나의 위치로
     rotate(angle);
@@ -81,10 +82,10 @@ class Vehicle {
     endShape(CLOSE); // close 마지막 점을 이어줌
 
     //둘러싼 원
-    noFill();
-    stroke(this.color);
-    ellipse(0, 0, 2 * this.rad);
-    pop();
+    // noFill();
+    // stroke(this.color);
+    // ellipse(0, 0, 2 * this.rad);
+    // pop();
   }
 
   //도망가는

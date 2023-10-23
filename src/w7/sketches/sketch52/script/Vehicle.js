@@ -15,22 +15,20 @@ class Vehicle {
     let cnt = 0; //카운트
     let steer = createVector(0, 0);
 
-    //내가 움직이는 공
-    //반경을 정해주기
+    //내가 움직이는 공, 반경을 정해주기
     others.forEach((eachOther) => {
       //나의 위치와 다른 친구의 위치의 거리를 계산
       let dist = this.pos.dist(eachOther.pos);
-
       //0이면 나
       if (dist > 0 && dist <= eachOther.rad + this.rad) {
         // 친구들에게서 나에게 향하는 백터
-        let towardMeVec = p5.Vector.sub(this.applyForce, eachOther.pos);
-
+        let towardMeVec = p5.Vector.sub(this.pos, eachOther.pos);
         towardMeVec.setMag(1 / dist);
         steer.add(towardMeVec);
         cnt++; // 계산을 몇번했는가?
       }
     });
+
     if (cnt > 0) {
       steer.div(cnt);
       steer.setMag(this.speedMx);
@@ -47,7 +45,6 @@ class Vehicle {
     } else if (this.pos.x > width + 20) {
       this.pos.x = -20;
     }
-
     if (this.pos.y < -20) {
       this.pos.y = height + 20;
     } else if (this.pos.y > height + 20) {

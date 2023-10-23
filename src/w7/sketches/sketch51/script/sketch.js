@@ -8,20 +8,12 @@ function setup() {
   colorMode(HSL, 360, 100, 100, 100);
 
   //쫒아오는
-  vehicle = new Vehicle(
-    width / 2,
-    height / 2,
-    16,
-    5,
-    0.05,
-    color(330, 100, 50)
-  );
-
+  vehicle = new Vehicle(width / 2, height / 2, 16, 5, 0.1, color(330, 100, 50));
+  mVec = createVector();
   // 반지름 16
   // 최대속도 5
   // 0.05
 
-  mVec = createVector();
   colorMode(RGB, 255, 255, 255);
   background(255);
 
