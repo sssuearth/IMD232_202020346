@@ -30,14 +30,14 @@ class Particle {
 
   display() {
     // colorMode(HSB, 100);
-    // noStroke();
     // fill(200, this.lifeSpan * 3);
     // ellipse(this.pos.x, this.pos.y, this.rad * 2);
     // stroke(0, this.lifeSpan * 3);
-    colorMode(HSB, 100);
+
+    // colorMode(RGB);
     noStroke();
     let alpha = map(this.lifespan, 0, 60, 0, 100);
-    fill(210, 100, 100, alpha); // 투명도 조절
+    fill(0, 50, 255, alpha);
     ellipse(this.pos.x, this.pos.y, this.rad);
   }
 
