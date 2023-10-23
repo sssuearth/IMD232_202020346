@@ -37,8 +37,7 @@ class Particle {
     colorMode(HSB, 100);
     noStroke();
     let alpha = map(this.lifespan, 0, 60, 0, 100);
-    fill(180, 100, 100, alpha); // 투명도 조절
-    //fill(0, 100, 100, this.lifeSpan);
+    fill(210, 100, 100, alpha); // 투명도 조절
     ellipse(this.pos.x, this.pos.y, this.rad);
   }
 
