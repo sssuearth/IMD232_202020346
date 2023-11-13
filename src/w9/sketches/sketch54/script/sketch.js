@@ -14,9 +14,7 @@ var Engine = Matter.Engine,
 var engine = Engine.create(),
   world = engine.world;
 
-// 필요 _ 계산을 1초에 60번 보다 더 많이함, 알아서 돌아가게
 // create runner
-//var를 let으로 바꿔도 작동
 var runner = Runner.create();
 
 let rock;
@@ -24,43 +22,32 @@ let rock;
 function setup() {
   setCanvasContainer('canvas', 800, 600, true);
 
-  // 물리 시뮬레이션에서 자주 쓰는 표현
-  // 충돌하는 물체(바디)들의 단위
   // add bodies
   var ground = Bodies.rectangle(395, 600, 815, 50, {
     isStatic: true,
-    // isStatic 고정됨 _ 바닥, 중간의 선반같은 사각형
     render: { fillStyle: '#060a19' },
   });
-  // rockOptions = { density: 0.004 },
   rock = Bodies.polygon(170, 450, 8, 20, { density: 0.004 });
-  // 다면체를 만드는 polygon, 8은 변의 갯수,
-  var anchor = { x: 170, y: 450 }, //좌표
-    elastic = Constraint.create({
-      pointA: anchor,
-      bodyB: rock,
-      length: 0.01,
-      damping: 0.01,
-      stiffness: 0.05,
-    });
-
-  // 탑 쌓기 해주는 피라미드
+  var anchor = { x: 170, y: 450 };
+  var elastic = Constraint.create({
+    pointA: anchor,
+    bodyB: rock,
+    length: 0.01,
+    damping: 0.01,
+    stiffness: 0.05,
+  });
   var pyramid = Composites.pyramid(500, 300, 9, 10, 0, 0, function (x, y) {
     return Bodies.rectangle(x, y, 25, 40);
   });
-
   var ground2 = Bodies.rectangle(610, 250, 200, 20, {
     isStatic: true,
     render: { fillStyle: '#060a19' },
   });
-
   var pyramid2 = Composites.pyramid(550, 0, 5, 10, 0, 0, function (x, y) {
     return Bodies.rectangle(x, y, 25, 40);
   });
 
-  // 3개의 우리가 만든 변수, 바디들을 추가
   Composite.add(engine.world, [
-    // engine.world 중력기본값
     ground,
     pyramid,
     ground2,
@@ -70,17 +57,16 @@ function setup() {
   ]);
 
   // add mouse control
-  var mouse = Mouse.create(document.querySelector('.p5Canvas')),
-    mouseConstraint = MouseConstraint.create(engine, {
-      mouse: mouse,
-      constraint: {
-        stiffness: 0.2,
-        render: {
-          visible: false,
-        },
+  var mouse = Mouse.create(document.querySelector('.p5Canvas'));
+  let mouseConstraint = MouseConstraint.create(engine, {
+    mouse: mouse,
+    constraint: {
+      stiffness: 0.2,
+      render: {
+        visible: false,
       },
-    });
-
+    },
+  });
   Composite.add(world, mouseConstraint);
 
   Runner.run(runner, engine);
@@ -97,8 +83,7 @@ function draw() {
   endShape(CLOSE);
 }
 
-// //불필요
-// // create renderer
+// create renderer
 // const elem = document.querySelector('#canvas');
 // var render = Render.create({
 //   element: elem,
@@ -128,10 +113,10 @@ function draw() {
 //   }
 // });
 
-// // keep the mouse in sync with rendering
+// keep the mouse in sync with rendering
 // render.mouse = mouse;
 
-// // fit the render viewport to the scene
+// fit the render viewport to the scene
 // Render.lookAt(render, {
 //   min: { x: 0, y: 0 },
 //   max: { x: 800, y: 600 },
