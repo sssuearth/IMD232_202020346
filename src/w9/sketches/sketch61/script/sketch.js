@@ -37,21 +37,21 @@ function setup() {
   setCanvasContainer('canvas', originalWidth, originalHeight, true);
 
   //1
-  let star = Vertices.fromPath('27 0 36 17 54 27 36 36 27 54 17 36 0 27 17 17');
+  //let star = Vertices.fromPath('27 0 36 17 54 27 36 36 27 54 17 36 0 27 17 17');
+  let star = Vertices.fromPath('0 0 19 6 38 0 32 20 38 38 19 32 0 38 5 19');
   //3
-  let polygon = Vertices.fromPath('13 0 38 7 42 36 12 46 12 30 0 15');
-
-  group = Body.nextGroup(true);
+  let arrow = Vertices.fromPath('13 0 38 7 42 36 12 46 12 30 0 15');
 
   // add bodies
   // ropeA; //1
-  ropeA = Composites.stack(130, 40, 10, 1, 10, 10, function (x, y) {
+  group = Body.nextGroup(true);
+  ropeA = Composites.stack(130, 40, 9, 1, 10, 10, function (x, y) {
     return Bodies.fromVertices(x, y, Common.choose([star]), {
       collisionFilter: { group: group },
     });
   });
 
-  Composites.chain(ropeA, 0.2, 0, -0.5, 0, {
+  Composites.chain(ropeA, 0.5, 0, -0.5, 0, {
     stiffness: 0.8,
     length: 2,
     render: { type: 'line' },
@@ -62,7 +62,7 @@ function setup() {
       bodyB: ropeA.bodies[0],
       pointB: { x: -25, y: 0 },
       pointA: { x: ropeA.bodies[0].position.x, y: ropeA.bodies[0].position.y },
-      stiffness: 0,
+      stiffness: 0.5,
     })
   );
 
@@ -91,14 +91,14 @@ function setup() {
   // ropeC; //3
   group = Body.nextGroup(true);
 
-  ropeC = Composites.stack(600, 40, 10, 1, 10, 10, function (x, y) {
-    return Bodies.fromVertices(x, y, Common.choose([polygon]), {
+  ropeC = Composites.stack(600, 40, 9, 1, 10, 10, function (x, y) {
+    return Bodies.fromVertices(x, y, Common.choose([arrow]), {
       collisionFilter: { group: group },
       //chamfer: 5,
     });
   });
 
-  Composites.chain(ropeC, 0.5, 0, -0.3, 0, { stiffness: 0.8, length: 0 });
+  Composites.chain(ropeC, 0.5, 0, -0.3, 0, { stiffness: 0.8, length: 10 });
   Composite.add(
     ropeC,
     Constraint.create({
@@ -125,9 +125,11 @@ function setup() {
   });
 
   Composite.add(world, mouseConstraint);
+
   // console.log('ropeA', ropeA.bodies);
   // console.log('ropeB', ropeB);
   // console.log('ropeC', ropeC.bodies);
+
   background('white');
   Runner.run(runner, engine);
 }
@@ -171,7 +173,7 @@ function draw() {
   });
 
   //3
-  fill('green');
+  fill('#33FF04');
   ropeC.bodies.forEach((eachBody) => {
     eachBody.parts.forEach((eachPart, idx) => {
       if (idx === 0) return;

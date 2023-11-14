@@ -90,7 +90,7 @@ function draw() {
   });
 
   noStroke();
-  fill('#FF10F0');
+  fill('red');
   stack.bodies.forEach((eachBody) => {
     // beginShape();
     // eachBody.vertices.forEach((eachVertex) => {
