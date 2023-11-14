@@ -130,7 +130,7 @@ function setup() {
   // console.log('ropeB', ropeB);
   // console.log('ropeC', ropeC.bodies);
 
-  background('white');
+  background('#121214');
   Runner.run(runner, engine);
 }
 
@@ -138,13 +138,13 @@ function setup() {
 function draw() {
   // 플렉시블하게
   mouse.pixelRatio = (pixelDensity() * width) / originalWidth;
-  background('white');
+  background('#121214');
   //Engine.update(engine);
 
   noStroke();
 
   //1
-  fill('#00FFFF');
+  fill('#66FF66');
   ropeA.bodies.forEach((eachBody) => {
     eachBody.parts.forEach((eachPart, idx) => {
       if (idx === 0) return;
@@ -173,7 +173,7 @@ function draw() {
   });
 
   //3
-  fill('#00FF00');
+  fill('#0000FF');
   ropeC.bodies.forEach((eachBody) => {
     eachBody.parts.forEach((eachPart, idx) => {
       if (idx === 0) return;
