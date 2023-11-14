@@ -160,20 +160,41 @@ function draw() {
   });
 
   //2
-  fill('#FF00FF');
+
+  // fill('#FF00FF');
+  // ropeB.bodies.forEach((eachBody) => {
+  //   beginShape();
+  //   eachBody.vertices.forEach((eachVertex) => {
+  //     vertex(
+  //       (eachVertex.x / originalWidth) * width,
+  //       (eachVertex.y / originalHeight) * height
+  //     );
+  //   });
+  //   endShape(CLOSE);
+  // });
+
   ropeB.bodies.forEach((eachBody) => {
     beginShape();
     eachBody.vertices.forEach((eachVertex) => {
-      vertex(
-        (eachVertex.x / originalWidth) * width,
-        (eachVertex.y / originalHeight) * height
-      );
+      // 색상 혼합
+      let startColor = color('#ff00ff'); // 시작 색상
+      let endColor = color('#00ffff'); // 종료 색상
+
+      // 각 점에 대한 상대적인 위치를 계산 (0~1)
+      let relativeX = (eachVertex.x / originalWidth) * width;
+      let relativeY = (eachVertex.y / originalHeight) * height;
+
+      // 그라데이션을 적용한 색상 계산
+      let lerpedColor = lerpColor(startColor, endColor, relativeY / height);
+
+      fill(lerpedColor);
+      vertex(relativeX, relativeY);
     });
     endShape(CLOSE);
   });
 
   //3
-  fill('#0000FF');
+  fill('#2137FF');
   ropeC.bodies.forEach((eachBody) => {
     eachBody.parts.forEach((eachPart, idx) => {
       if (idx === 0) return;
