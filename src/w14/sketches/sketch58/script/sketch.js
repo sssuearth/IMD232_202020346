@@ -53,41 +53,11 @@ function setup() {
         });
     };
 
-    [
-      './svg/iconmonstr-check-mark-8-icon.svg',
-      './svg/iconmonstr-direction-4-icon.svg',
-      './svg/iconmonstr-paperclip-2-icon.svg',
-      './svg/iconmonstr-puzzle-icon.svg',
-      './svg/iconmonstr-user-icon.svg',
-    ].forEach(function (path, i) {
-      loadSvg(path).then(function (root) {
-        var color = Common.choose([
-          '#f19648',
-          '#f5d259',
-          '#f55a3c',
-          '#063e7b',
-          '#ececd1',
-        ]);
-        var vertexSets = select(root, 'path').map(function (path) {
-          return Vertices.scale(Svg.pathToVertices(path, 30), 0.4, 0.4);
-        });
-        const aNewBody = Bodies.fromVertices(
-          100 + i * 150,
-          200 + i * 50,
-          vertexSets,
-          {
-            render: {
-              fillStyle: color,
-              strokeStyle: color,
-              lineWidth: 1,
-            },
-          },
-          true
-        );
-        svgObjs.push(aNewBody);
-        Composite.add(world, aNewBody);
-      });
-    });
+    //   './svg/iconmonstr-check-mark-8-icon.svg',
+    //   './svg/iconmonstr-direction-4-icon.svg',
+    //   './svg/iconmonstr-paperclip-2-icon.svg',
+    //   './svg/iconmonstr-puzzle-icon.svg',
+    //   './svg/iconmonstr-user-icon.svg',
 
     loadSvg('./svg/iconmonstr-check-mark-8-icon.svg').then(function (root) {
       // 크기 조절
@@ -105,22 +75,18 @@ function setup() {
           scaleFactor
         );
       });
-
+      // 원하는 위치로 변경 (400, 80)
       const aNewBody = Bodies.fromVertices(
-        200,
+        400,
         80,
         vertexSets,
         {
-          isStatic: true, // 고정하기 위해 추가된 부분
           render: {
-            fillStyle: color,
-            strokeStyle: color,
             lineWidth: 1,
           },
         },
         true
       );
-
       svgObjs.push(aNewBody);
       Composite.add(world, aNewBody);
     });
@@ -164,7 +130,7 @@ function draw() {
   });
 
   noStroke();
-  fill('black');
+  fill('blue');
   svgObjs.forEach((eachBody) => {
     eachBody.parts.forEach((eachPart, idx) => {
       if (idx === 0) return;
