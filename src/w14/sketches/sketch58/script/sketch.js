@@ -21,8 +21,8 @@ const engine = Engine.create(),
 // create runner
 const runner = Runner.create();
 
-const oWidth = 800;
-const oHeight = 600;
+const oWidth = 1080; //800
+const oHeight = 720; //600
 
 const walls = [];
 const svgObjs = [];
@@ -32,10 +32,14 @@ let mouse;
 function setup() {
   setCanvasContainer('canvas', oWidth, oHeight, true);
 
-  walls.push(Bodies.rectangle(400, 0, 800, 50, { isStatic: true }));
-  walls.push(Bodies.rectangle(400, 600, 800, 50, { isStatic: true }));
-  walls.push(Bodies.rectangle(800, 300, 50, 600, { isStatic: true }));
-  walls.push(Bodies.rectangle(0, 300, 50, 600, { isStatic: true }));
+  //위
+  walls.push(Bodies.rectangle(540, 0, 1080, 10, { isStatic: true }));
+  //아래
+  walls.push(Bodies.rectangle(540, 720, 1080, 10, { isStatic: true }));
+  //오른쪽
+  walls.push(Bodies.rectangle(1080, 360, 10, 720, { isStatic: true }));
+  //왼쪽
+  walls.push(Bodies.rectangle(0, 360, 10, 720, { isStatic: true }));
   Composite.add(world, walls);
 
   // add bodies
@@ -53,20 +57,14 @@ function setup() {
         });
     };
 
-    //   './svg/iconmonstr-check-mark-8-icon.svg',
-    //   './svg/iconmonstr-direction-4-icon.svg',
-    //   './svg/iconmonstr-paperclip-2-icon.svg',
-    //   './svg/iconmonstr-puzzle-icon.svg',
-    //   './svg/iconmonstr-user-icon.svg',
-
     loadSvg('./svg/iconmonstr-check-mark-8-icon.svg').then(function (root) {
       // 크기 조절
-      const scaleFactor = 0.3; // 원하는 비율로 조절
-      const svgElement = root.querySelector('svg');
-      const originalWidth = parseInt(svgElement.getAttribute('width'));
-      const originalHeight = parseInt(svgElement.getAttribute('height'));
-      svgElement.setAttribute('width', originalWidth * scaleFactor);
-      svgElement.setAttribute('height', originalHeight * scaleFactor);
+      const scaleFactor = 0.2; // 원하는 비율로 조절
+      // const svgElement = root.querySelector('svg');
+      // const originalWidth = parseInt(svgElement.getAttribute('width'));
+      // const originalHeight = parseInt(svgElement.getAttribute('height'));
+      // svgElement.setAttribute('width', originalWidth * scaleFactor);
+      // svgElement.setAttribute('height', originalHeight * scaleFactor);
 
       var vertexSets = select(root, 'path').map(function (path) {
         return Vertices.scale(
@@ -75,18 +73,22 @@ function setup() {
           scaleFactor
         );
       });
-      // 원하는 위치로 변경 (400, 80)
+
       const aNewBody = Bodies.fromVertices(
-        400,
-        80,
+        200,
+        120,
         vertexSets,
         {
+          isStatic: true, // 고정하기 위해 추가된 부분
           render: {
+            fillStyle: color,
+            strokeStyle: color,
             lineWidth: 1,
           },
         },
         true
       );
+
       svgObjs.push(aNewBody);
       Composite.add(world, aNewBody);
     });

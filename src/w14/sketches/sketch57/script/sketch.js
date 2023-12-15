@@ -54,20 +54,13 @@ function setup() {
     };
 
     [
-      './svg/iconmonstr-check-mark-8-icon.svg',
-      './svg/iconmonstr-direction-4-icon.svg',
+      // './svg/iconmonstr-check-mark-8-icon.svg',
+      // './svg/iconmonstr-direction-4-icon.svg',
       './svg/iconmonstr-paperclip-2-icon.svg',
       './svg/iconmonstr-puzzle-icon.svg',
       './svg/iconmonstr-user-icon.svg',
     ].forEach(function (path, i) {
       loadSvg(path).then(function (root) {
-        var color = Common.choose([
-          '#f19648',
-          '#f5d259',
-          '#f55a3c',
-          '#063e7b',
-          '#ececd1',
-        ]);
         var vertexSets = select(root, 'path').map(function (path) {
           return Vertices.scale(Svg.pathToVertices(path, 30), 0.4, 0.4);
         });
