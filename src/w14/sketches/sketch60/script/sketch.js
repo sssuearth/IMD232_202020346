@@ -7,7 +7,7 @@ const {
   MouseConstraint,
   Mouse,
   Composite,
-  // Vertices,
+  Vertices,
   Bodies,
 } = Matter;
 
