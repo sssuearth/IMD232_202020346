@@ -10,19 +10,27 @@ const {
   Vertices,
   Bodies,
   Svg,
-  Body,
 } = Matter;
 
 Common.setDecomp(decomp);
 
-const engine = Engine.create();
-const world = engine.world;
+// create engine
+const engine = Engine.create(),
+  world = engine.world;
+
+// create runner
 const runner = Runner.create();
-const svgObjs = [];
+
+const oWidth = 1080; //800
+const oHeight = 720; //600
+
 const walls = [];
+const svgObjs = [];
+
+let mouse;
 
 function setup() {
-  setCanvasContainer('canvas', 1080, 720, true);
+  setCanvasContainer('canvas', oWidth, oHeight, true);
 
   //위
   walls.push(Bodies.rectangle(540, 0, 1080, 10, { isStatic: true }));
@@ -49,26 +57,18 @@ function setup() {
         });
     };
 
-    //1줄
-    const yOffset = 130;
     [
-      './svg1/1-04.svg',
-      './svg1/1-05.svg',
-      './svg1/1-06.svg',
-      './svg1/1-07.svg',
-      './svg1/1-08.svg',
+      //다른요소들
+      './svg1/0-64.svg',
     ].forEach(function (path, i) {
       loadSvg(path).then(function (root) {
-        var paths = select(root, 'path');
-        var boundingBox = getBoundingBox(paths);
-
-        var vertexSets = paths.map(function (path) {
-          return Svg.pathToVertices(path, 5);
+        var vertexSets = select(root, 'path').map(function (path) {
+          //return Vertices.scale(Svg.pathToVertices(path, 20), 0.4, 0.4);
+          return Svg.pathToVertices(path, 2); //원본비율로
         });
-
         const aNewBody = Bodies.fromVertices(
-          200 + i * (boundingBox.max.x - boundingBox.min.x + 20), // 간격을 20으로 설정하고 조절
-          yOffset,
+          900,
+          550,
           vertexSets,
           {
             //isStatic: true,
@@ -80,13 +80,275 @@ function setup() {
           },
           true
         );
-
-        // Adjust position based on bounding box
-        Body.translate(aNewBody, {
-          x: boundingBox.min.x - aNewBody.bounds.min.x,
-          y: boundingBox.min.y - aNewBody.bounds.min.y,
+        svgObjs.push(aNewBody);
+        Composite.add(world, aNewBody);
+      });
+    });
+    [
+      //1줄
+      './svg1/1-04.svg',
+      './svg1/1-05.svg',
+      './svg1/1-06.svg',
+      './svg1/1-07.svg',
+      './svg1/1-08.svg',
+    ].forEach(function (path, i) {
+      loadSvg(path).then(function (root) {
+        var vertexSets = select(root, 'path').map(function (path) {
+          //return Vertices.scale(Svg.pathToVertices(path, 20), 0.4, 0.4);
+          return Svg.pathToVertices(path, 5); //원본비율로
         });
+        const aNewBody = Bodies.fromVertices(
+          200 + i * 170,
+          130,
+          vertexSets,
+          {
+            //isStatic: true,
+            render: {
+              fillStyle: color,
+              strokeStyle: color,
+              lineWidth: 1,
+            },
+          },
+          true
+        );
+        svgObjs.push(aNewBody);
+        Composite.add(world, aNewBody);
+      });
+    });
 
+    [
+      //2줄
+      './svg1/2-09.svg',
+      './svg1/2-10.svg',
+      './svg1/2-11.svg',
+      './svg1/2-12.svg',
+      './svg1/2-13.svg',
+      './svg1/2-14.svg',
+      './svg1/2-15.svg',
+    ].forEach(function (path, i) {
+      loadSvg(path).then(function (root) {
+        var vertexSets = select(root, 'path').map(function (path) {
+          //return Vertices.scale(Svg.pathToVertices(path, 20), 0.4, 0.4);
+          return Svg.pathToVertices(path, 5); //원본비율로
+        });
+        const aNewBody = Bodies.fromVertices(
+          210 + i * 110,
+          260,
+          vertexSets,
+          {
+            //isStatic: true,
+            render: {
+              fillStyle: color,
+              strokeStyle: color,
+              lineWidth: 1,
+            },
+          },
+          true
+        );
+        svgObjs.push(aNewBody);
+        Composite.add(world, aNewBody);
+      });
+    });
+
+    [
+      //3줄
+      './svg1/3-16.svg',
+      './svg1/3-17.svg',
+      './svg1/3-18.svg',
+      './svg1/3-19.svg',
+      './svg1/3-20.svg',
+      './svg1/3-21.svg',
+      './svg1/3-22.svg',
+    ].forEach(function (path, i) {
+      loadSvg(path).then(function (root) {
+        var vertexSets = select(root, 'path').map(function (path) {
+          //return Vertices.scale(Svg.pathToVertices(path, 20), 0.4, 0.4);
+          return Svg.pathToVertices(path, 5); //원본비율로
+        });
+        const aNewBody = Bodies.fromVertices(
+          300 + i * 90,
+          350,
+          vertexSets,
+          {
+            //isStatic: true,
+            render: {
+              fillStyle: color,
+              strokeStyle: color,
+              lineWidth: 1,
+            },
+          },
+          true
+        );
+        svgObjs.push(aNewBody);
+        Composite.add(world, aNewBody);
+      });
+    });
+
+    [
+      //4줄
+      './svg1/4-23.svg',
+      './svg1/4-24.svg',
+      './svg1/4-25.svg',
+      './svg1/4-26.svg',
+      './svg1/4-27.svg',
+      './svg1/4-28.svg',
+      './svg1/4-29.svg',
+    ].forEach(function (path, i) {
+      loadSvg(path).then(function (root) {
+        var vertexSets = select(root, 'path').map(function (path) {
+          //return Vertices.scale(Svg.pathToVertices(path, 20), 0.4, 0.4);
+          return Svg.pathToVertices(path, 5); //원본비율로
+        });
+        const aNewBody = Bodies.fromVertices(
+          350 + i * 65,
+          420,
+          vertexSets,
+          {
+            //isStatic: true,
+            render: {
+              fillStyle: color,
+              strokeStyle: color,
+              lineWidth: 1,
+            },
+          },
+          true
+        );
+        svgObjs.push(aNewBody);
+        Composite.add(world, aNewBody);
+      });
+    });
+
+    [
+      //5줄
+      './svg1/5-30.svg',
+      './svg1/5-31.svg',
+      './svg1/5-32.svg',
+      './svg1/5-33.svg',
+      './svg1/5-34.svg',
+      './svg1/5-35.svg',
+      './svg1/5-36.svg',
+    ].forEach(function (path, i) {
+      loadSvg(path).then(function (root) {
+        var vertexSets = select(root, 'path').map(function (path) {
+          //return Vertices.scale(Svg.pathToVertices(path, 20), 0.4, 0.4);
+          return Svg.pathToVertices(path, 5); //원본비율로
+        });
+        const aNewBody = Bodies.fromVertices(
+          375 + i * 60,
+          470,
+          vertexSets,
+          {
+            //isStatic: true,
+            render: {
+              fillStyle: color,
+              strokeStyle: color,
+              lineWidth: 1,
+            },
+          },
+          true
+        );
+        svgObjs.push(aNewBody);
+        Composite.add(world, aNewBody);
+      });
+    });
+
+    [
+      //6줄
+      './svg1/6-37.svg',
+      './svg1/6-38.svg',
+      './svg1/6-39.svg',
+      './svg1/6-40.svg',
+      './svg1/6-41.svg',
+      './svg1/6-42.svg',
+      './svg1/6-43.svg',
+    ].forEach(function (path, i) {
+      loadSvg(path).then(function (root) {
+        var vertexSets = select(root, 'path').map(function (path) {
+          //return Vertices.scale(Svg.pathToVertices(path, 20), 0.4, 0.4);
+          return Svg.pathToVertices(path, 5); //원본비율로
+        });
+        const aNewBody = Bodies.fromVertices(
+          400 + i * 50,
+          520,
+          vertexSets,
+          {
+            //isStatic: true,
+            render: {
+              fillStyle: color,
+              strokeStyle: color,
+              lineWidth: 1,
+            },
+          },
+          true
+        );
+        svgObjs.push(aNewBody);
+        Composite.add(world, aNewBody);
+      });
+    });
+
+    [
+      //7줄
+      './svg1/7-44.svg',
+      './svg1/7-45.svg',
+      './svg1/7-46.svg',
+      './svg1/7-47.svg',
+      './svg1/7-48.svg',
+      './svg1/7-49.svg',
+      './svg1/7-50.svg',
+    ].forEach(function (path, i) {
+      loadSvg(path).then(function (root) {
+        var vertexSets = select(root, 'path').map(function (path) {
+          //return Vertices.scale(Svg.pathToVertices(path, 20), 0.4, 0.4);
+          return Svg.pathToVertices(path, 5); //원본비율로
+        });
+        const aNewBody = Bodies.fromVertices(
+          430 + i * 40,
+          570,
+          vertexSets,
+          {
+            //isStatic: true,
+            render: {
+              fillStyle: color,
+              strokeStyle: color,
+              lineWidth: 1,
+            },
+          },
+          true
+        );
+        svgObjs.push(aNewBody);
+        Composite.add(world, aNewBody);
+      });
+    });
+
+    [
+      //7줄
+      './svg1/8-54.svg',
+      './svg1/8-55.svg',
+      './svg1/8-56.svg',
+      './svg1/8-57.svg',
+      './svg1/8-58.svg',
+      './svg1/8-59.svg',
+      './svg1/8-50.svg',
+    ].forEach(function (path, i) {
+      loadSvg(path).then(function (root) {
+        var vertexSets = select(root, 'path').map(function (path) {
+          //return Vertices.scale(Svg.pathToVertices(path, 20), 0.4, 0.4);
+          return Svg.pathToVertices(path, 5); //원본비율로
+        });
+        const aNewBody = Bodies.fromVertices(
+          450 + i * 30,
+          600,
+          vertexSets,
+          {
+            //isStatic: true,
+            render: {
+              fillStyle: color,
+              strokeStyle: color,
+              lineWidth: 1,
+            },
+          },
+          true
+        );
         svgObjs.push(aNewBody);
         Composite.add(world, aNewBody);
       });
@@ -94,7 +356,7 @@ function setup() {
   }
 
   mouse = Mouse.create(canvas.elt);
-  mouse.pixelRatio = (pixelDensity() * width) / 1080;
+  mouse.pixelRatio = (pixelDensity() * width) / oWidth;
   let mouseConstraint = MouseConstraint.create(engine, {
     mouse: mouse,
     constraint: {
@@ -111,7 +373,7 @@ function setup() {
 }
 
 function draw() {
-  mouse.pixelRatio = (pixelDensity() * width) / 1080;
+  mouse.pixelRatio = (pixelDensity() * width) / oWidth;
 
   background('white');
 
@@ -120,44 +382,27 @@ function draw() {
   walls.forEach((eachWall) => {
     beginShape();
     eachWall.vertices.forEach((eachVertex) => {
-      vertex((eachVertex.x / 1080) * width, (eachVertex.y / 720) * height);
+      vertex(
+        (eachVertex.x / oWidth) * width,
+        (eachVertex.y / oHeight) * height
+      );
     });
     endShape(CLOSE);
   });
 
   noStroke();
-  fill('black');
+  fill('BLACK');
   svgObjs.forEach((eachBody) => {
     eachBody.parts.forEach((eachPart, idx) => {
       if (idx === 0) return;
       beginShape();
       eachPart.vertices.forEach((eachVertex) => {
-        vertex((eachVertex.x / 1080) * width, (eachVertex.y / 720) * height);
+        vertex(
+          (eachVertex.x / oWidth) * width,
+          (eachVertex.y / oHeight) * height
+        );
       });
       endShape(CLOSE);
     });
   });
-}
-
-// Helper function to get bounding box of paths
-function getBoundingBox(paths) {
-  var minX = Infinity,
-    minY = Infinity,
-    maxX = -Infinity,
-    maxY = -Infinity;
-
-  paths.forEach(function (path) {
-    var vertices = Svg.pathToVertices(path, 5);
-    vertices.forEach(function (vertex) {
-      minX = Math.min(minX, vertex.x);
-      minY = Math.min(minY, vertex.y);
-      maxX = Math.max(maxX, vertex.x);
-      maxY = Math.max(maxY, vertex.y);
-    });
-  });
-
-  return {
-    min: { x: minX, y: minY },
-    max: { x: maxX, y: maxY },
-  };
 }
