@@ -122,11 +122,12 @@ function setup() {
     });
     [
       //1줄
-      './svg1/1-04.svg',
+      //'./svg1/1-04.svg',
       './svg1/1-05.svg',
       './svg1/1-06.svg',
       './svg1/1-07.svg',
       './svg1/1-08.svg',
+      './fsvg/2.svg',
     ].forEach(function (path, i) {
       loadSvg(path).then(function (root) {
         var vertexSets = select(root, 'path').map(function (path) {
@@ -161,6 +162,7 @@ function setup() {
       './svg1/2-13.svg',
       './svg1/2-14.svg',
       './svg1/2-15.svg',
+      './fsvg/3.svg',
     ].forEach(function (path, i) {
       loadSvg(path).then(function (root) {
         var vertexSets = select(root, 'path').map(function (path) {
