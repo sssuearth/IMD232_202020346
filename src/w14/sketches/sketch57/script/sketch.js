@@ -53,20 +53,22 @@ function setup() {
         });
     };
 
+    const yOffset = 200;
     [
-      // './svg/iconmonstr-check-mark-8-icon.svg',
-      // './svg/iconmonstr-direction-4-icon.svg',
+      './svg/iconmonstr-check-mark-8-icon.svg',
+      './svg/iconmonstr-direction-4-icon.svg',
       './svg/iconmonstr-paperclip-2-icon.svg',
       './svg/iconmonstr-puzzle-icon.svg',
       './svg/iconmonstr-user-icon.svg',
     ].forEach(function (path, i) {
       loadSvg(path).then(function (root) {
         var vertexSets = select(root, 'path').map(function (path) {
-          return Vertices.scale(Svg.pathToVertices(path, 30), 0.4, 0.4);
+          return Vertices.scale(Svg.pathToVertices(path, 20), 0.4, 0.4);
+          //return Svg.pathToVertices(path, 20); //원본비율로
         });
         const aNewBody = Bodies.fromVertices(
           100 + i * 150,
-          200 + i * 50,
+          yOffset,
           vertexSets,
           {
             render: {
