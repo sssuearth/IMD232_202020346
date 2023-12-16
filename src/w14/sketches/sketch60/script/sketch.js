@@ -32,7 +32,7 @@ function setup() {
 
   walls.push(Bodies.rectangle(400, 0, 800, 50));
   walls.push(Bodies.rectangle(400, 600, 800, 50));
-  walls.push(Bodies.rectangle(800, 300, 50, 60));
+  walls.push(Bodies.rectangle(800, 300, 50, 600));
   walls.push(Bodies.rectangle(0, 300, 50, 600));
 
   // these static walls will not be rendered in this sprites example, see options
@@ -92,34 +92,34 @@ function draw() {
 
   background('white');
 
-  // stroke(0);
-  // noFill();
-  // walls.forEach((eachWall) => {
-  //   beginShape();
-  //   eachWall.vertices.forEach((eachVertex) => {
-  //     vertex(
-  //       (eachVertex.x / oWidth) * width,
-  //       (eachVertex.y / oHeight) * height
-  //     );
-  //   });
-  //   endShape(CLOSE);
-  // });
+  stroke(0);
+  noFill();
+  walls.forEach((eachWall) => {
+    beginShape();
+    eachWall.vertices.forEach((eachVertex) => {
+      vertex(
+        (eachVertex.x / oWidth) * width,
+        (eachVertex.y / oHeight) * height
+      );
+    });
+    endShape(CLOSE);
+  });
 
-  // noStroke();
-  // fill('blue');
-  // stack.bodies.forEach((eachBody) => {
-  //   eachBody.parts.forEach((eachPart, idx) => {
-  //     if (idx === 0) return;
-  //     beginShape();
-  //     eachPart.vertices.forEach((eachVertex) => {
-  //       vertex(
-  //         (eachVertex.x / oWidth) * width,
-  //         (eachVertex.y / oHeight) * height
-  //       );
-  //     });
-  //     endShape(CLOSE);
-  //   });
-  // });
+  noStroke();
+  fill('blue');
+  stack.bodies.forEach((eachBody) => {
+    eachBody.parts.forEach((eachPart, idx) => {
+      if (idx === 0) return;
+      beginShape();
+      eachPart.vertices.forEach((eachVertex) => {
+        vertex(
+          (eachVertex.x / oWidth) * width,
+          (eachVertex.y / oHeight) * height
+        );
+      });
+      endShape(CLOSE);
+    });
+  });
 }
 
 // var Engine = Matter.Engine,
