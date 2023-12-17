@@ -24,32 +24,32 @@ const walls = [];
 let m;
 let mc;
 
-const originalWidth = 1080; //1080 //800
-const originalHeight = 720; //720 //600
+const originalWidth = 1080;
+const originalHeight = 720;
 
 // 이미지 로드할 변수 선언
-let boxImages1 = [];
-let ballImages2 = [];
+let box1Images = [];
+let box2Images = [];
 
 // 현재까지 몇 번째 이미지를 선택했는지 추적하는 변수
-let boxImageIndex = 0;
-let ballImageIndex = 0;
+let box1ImageIndex1 = 0;
+let box2ImageIndex2 = 0;
 
 // preload 함수에서 이미지 로드
 function preload() {
   for (let i = 4; i <= 8; i++) {
     // 5개의 다른 이미지를 불러와 배열에 추가
-    boxImages1.push(loadImage(`./3dpng/0-${i}.png`));
+    box1Images.push(loadImage(`./3dpng/0-${i}.png`));
   }
 
-  for (let i = 53; i <= 57; i++) {
+  for (let i = 9; i <= 15; i++) {
     // 5개의 다른 이미지를 불러와 배열에 추가
-    ballImages2.push(loadImage(`./3dpng/0-${i}.png`));
+    box2Images.push(loadImage(`./3dpng/0-${i}.png`));
   }
 
   // 이미지 배열 랜덤 셔플
-  shuffleArray(boxImages1);
-  shuffleArray(ballImages2);
+  shuffleArray(box1Images);
+  shuffleArray(box2Images);
 }
 
 function shuffleArray(array) {
@@ -83,46 +83,48 @@ function setup() {
 
   // 생성할 사각형 및 원의 갯수 설정
   const numRectangles1 = 5;
-  const numRectangles2 = 5;
+  const numRectangles2 = 7;
 
-  //1줄
+  //
+  //
+  //1줄 5개
   for (let i = 0; i < numRectangles1; i++) {
-    const x = 200 + i * 150; // x 위치를 고정
+    const x = 180 + i * 150; // x 위치를 고정
     const y = 50;
 
     Composite.add(
       stack,
-      Bodies.rectangle(x, y, 80, 80, {
+      Bodies.rectangle(x, y, 50, 50, {
         render: {
           strokeStyle: '#ffffff',
           sprite: {
-            texture: boxImages1[boxImageIndex % boxImages1.length], // 중복을 방지하기 위해 배열 크기로 나눔
+            texture: box1Images[box1ImageIndex1 % box1Images.length], // 중복을 방지하기 위해 배열 크기로 나눔
           },
         },
       })
     );
 
-    boxImageIndex++;
+    box1ImageIndex1++;
   }
 
-  //2줄
+  //2줄 7개
   for (let i = 0; i < numRectangles2; i++) {
-    const x = 200 + i * 15; // x 위치를 고정
-    const y = 300; // y 위치를 조절하여 15씩 차이 나게 설정
+    const x = 200 + i * 100; // x 위치를 고정
+    const y = 210; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
       stack,
-      Bodies.rectangle(x, y, 80, 80, {
+      Bodies.rectangle(x, y, 40, 40, {
         render: {
           strokeStyle: '#ffffff',
           sprite: {
-            texture: ballImages2[ballImageIndex % ballImages2.length], // 중복을 방지하기 위해 배열 크기로 나눔
+            texture: box2Images[box2ImageIndex2 % box2Images.length], // 중복을 방지하기 위해 배열 크기로 나눔
           },
         },
       })
     );
 
-    ballImageIndex++;
+    box2ImageIndex2++;
   }
 
   // 만든 바디를 세계에 추가
