@@ -84,6 +84,10 @@ function preload() {
   for (let i = 51; i <= 57; i++) {
     box8Images.push(loadImage(`./3dpng/0-${i}.png`));
   }
+  //8줄
+  for (let i = 58; i <= 63; i++) {
+    box9Images.push(loadImage(`./3dpng/0-${i}.png`));
+  }
 
   // 이미지 배열 랜덤 셔플
   shuffleArray(box1Images);
@@ -213,7 +217,7 @@ function setup() {
   }
   //5줄 7개
   for (let i = 0; i < numRectangles5; i++) {
-    const x = 308 + i * 70; // x 위치를 고정
+    const x = 308 + i * 71; // x 위치를 고정
     const y = 478; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
@@ -232,7 +236,7 @@ function setup() {
   //6줄 7개
   for (let i = 0; i < numRectangles6; i++) {
     const x = 335 + i * 65; // x 위치를 고정
-    const y = 533; // y 위치를 조절하여 15씩 차이 나게 설정
+    const y = 530; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
       stack,
@@ -250,7 +254,7 @@ function setup() {
   //7줄 7개
   for (let i = 0; i < numRectangles7; i++) {
     const x = 360 + i * 58; // x 위치를 고정
-    const y = 578; // y 위치를 조절하여 15씩 차이 나게 설정
+    const y = 575; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
       stack,
@@ -268,7 +272,7 @@ function setup() {
   //8줄 7개
   for (let i = 0; i < numRectangles8; i++) {
     const x = 385 + i * 49; // x 위치를 고정
-    const y = 620; // y 위치를 조절하여 15씩 차이 나게 설정
+    const y = 615; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
       stack,
@@ -282,6 +286,24 @@ function setup() {
     );
 
     box8ImageIndex8++;
+  }
+  //9줄 6개
+  for (let i = 0; i < numRectangles9; i++) {
+    const x = 418 + i * 49; // x 위치를 고정
+    const y = 650; // y 위치를 조절하여 15씩 차이 나게 설정
+
+    Composite.add(
+      stack,
+      Bodies.rectangle(x, y, 30, 30, {
+        render: {
+          sprite: {
+            texture: box9Images[box9ImageIndex9 % box9Images.length], // 중복을 방지하기 위해 배열 크기로 나눔
+          },
+        },
+      })
+    );
+
+    box9ImageIndex9++;
   }
 
   // 만든 바디를 세계에 추가
