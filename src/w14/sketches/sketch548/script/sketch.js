@@ -57,7 +57,7 @@ function preload() {
     box1Images.push(loadImage(`./3dpng/0-${i}.png`));
   }
   //2줄
-  for (let i = 9; i <= 15; i++) {
+  for (let i = 9; i <= 14; i++) {
     box2Images.push(loadImage(`./3dpng/0-${i}.png`));
   }
   //3줄
@@ -128,7 +128,7 @@ function setup() {
 
   // 생성할 사각형 갯수
   const numRectangles1 = 5;
-  const numRectangles2 = 7;
+  const numRectangles2 = 6;
   const numRectangles3 = 7;
   const numRectangles4 = 7;
   const numRectangles5 = 7;
@@ -141,7 +141,7 @@ function setup() {
 
   //1줄 5개
   for (let i = 0; i < numRectangles1; i++) {
-    const x = 175 + i * 160; // x 위치를 고정
+    const x = 158 + i * 160; // x 위치를 고정
     const y = 50;
 
     Composite.add(
@@ -159,8 +159,8 @@ function setup() {
   }
   //2줄 7개
   for (let i = 0; i < numRectangles2; i++) {
-    const x = 220 + i * 100; // x 위치를 고정
-    const y = 232; // y 위치를 조절하여 15씩 차이 나게 설정
+    const x = 220 + i * 115; // x 위치를 고정
+    const y = 235; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
       stack,
@@ -178,7 +178,7 @@ function setup() {
   //3줄 7개
   for (let i = 0; i < numRectangles3; i++) {
     const x = 245 + i * 90; // x 위치를 고정
-    const y = 334; // y 위치를 조절하여 15씩 차이 나게 설정
+    const y = 338; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
       stack,
@@ -195,8 +195,8 @@ function setup() {
   }
   //4줄 7개
   for (let i = 0; i < numRectangles4; i++) {
-    const x = 290 + i * 80; // x 위치를 고정
-    const y = 410; // y 위치를 조절하여 15씩 차이 나게 설정
+    const x = 280 + i * 80; // x 위치를 고정
+    const y = 415; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
       stack,
@@ -213,8 +213,8 @@ function setup() {
   }
   //5줄 7개
   for (let i = 0; i < numRectangles5; i++) {
-    const x = 310 + i * 70; // x 위치를 고정
-    const y = 473; // y 위치를 조절하여 15씩 차이 나게 설정
+    const x = 308 + i * 70; // x 위치를 고정
+    const y = 478; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
       stack,
@@ -231,8 +231,8 @@ function setup() {
   }
   //6줄 7개
   for (let i = 0; i < numRectangles6; i++) {
-    const x = 330 + i * 65; // x 위치를 고정
-    const y = 528; // y 위치를 조절하여 15씩 차이 나게 설정
+    const x = 335 + i * 65; // x 위치를 고정
+    const y = 533; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
       stack,
@@ -249,7 +249,7 @@ function setup() {
   }
   //7줄 7개
   for (let i = 0; i < numRectangles7; i++) {
-    const x = 350 + i * 58; // x 위치를 고정
+    const x = 360 + i * 58; // x 위치를 고정
     const y = 578; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
@@ -267,7 +267,7 @@ function setup() {
   }
   //8줄 7개
   for (let i = 0; i < numRectangles8; i++) {
-    const x = 375 + i * 49; // x 위치를 고정
+    const x = 385 + i * 49; // x 위치를 고정
     const y = 620; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
