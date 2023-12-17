@@ -10,7 +10,7 @@ var Engine = Matter.Engine,
   Bodies = Matter.Bodies;
 
 // 엔진 만들기
-var engine = Engine.create(),
+var engine = Engine.create({ gravity: { x: 0, y: 0 } }),
   world = engine.world;
 
 // 러너 만들고 실행하기
@@ -25,20 +25,29 @@ const walls = [];
 let m;
 let mc;
 
-// 창 사이즈가 바뀔때, 플렉서블하게, 비례에 맞게 반응할 수 있도록
-// /originalWidth로 나누고 * width를 곱해서 환산
+// 창 사이즈 플렉서블
 const originalWidth = 1080; //1080 //800
 const originalHeight = 720; //720 //600
+
+// 이미지 로드할 변수 선언
+let boxImage;
+let ballImage;
+
+// preload 함수에서 이미지 로드
+function preload() {
+  boxImage = loadImage('./img/box.png');
+  ballImage = loadImage('./img/ball.png');
+}
 
 function setup() {
   setCanvasContainer('canvas', originalWidth, originalHeight, true);
 
   // 바디 만들기
   // 할당은 여기서
-  (offset = 20),
-    (options = {
-      isStatic: true,
-    });
+  offset = 20;
+  options = {
+    isStatic: true,
+  };
 
   world.bodies = [];
 
@@ -64,7 +73,7 @@ function setup() {
         render: {
           strokeStyle: '#ffffff',
           sprite: {
-            texture: './img/box.png',
+            texture: boxImage,
           },
         },
       });
@@ -76,7 +85,7 @@ function setup() {
         friction: 0.01,
         render: {
           sprite: {
-            texture: './img/ball.png',
+            texture: ballImage,
           },
         },
       });
@@ -86,9 +95,8 @@ function setup() {
   //만든 바디를 세계에 추가
   Composite.add(world, stack);
 
-  // 마우스
-
-  m = Mouse.create(document.querySelector('.p5Canvas'));
+  // 마우스s
+  m = Mouse.create(document.querySelector('canvas'));
   // m.pixelRatio = pixelDensity();
   m.pixelRatio = (pixelDensity() * width) / originalWidth;
   mc = MouseConstraint.create(engine, {
@@ -109,7 +117,7 @@ function draw() {
   background('white');
 
   noStroke();
-  fill('red');
+  fill('blue');
 
   walls.forEach((eachWall) => {
     beginShape();
@@ -122,29 +130,42 @@ function draw() {
     endShape(CLOSE);
   });
 
-  fill('black');
+  noStroke();
+
   stack.bodies.forEach((eachBody) => {
-    beginShape();
-    eachBody.vertices.forEach((each) => {
-      vertex(
-        (each.x / originalWidth) * width,
-        (each.y / originalHeight) * height
+    const pos = eachBody.position;
+    const angle = eachBody.angle;
+
+    push(); // push and pop are used to isolate the transformation
+    translate(pos.x, pos.y);
+    rotate(angle);
+
+    if (eachBody.render.sprite && eachBody.render.sprite.texture) {
+      // 이미지가 있는 경우 이미지로 채우기
+      image(
+        eachBody.render.sprite.texture,
+        -eachBody.render.sprite.xOffset,
+        -eachBody.render.sprite.yOffset,
+        eachBody.render.sprite.width,
+        eachBody.render.sprite.height
       );
-    });
-    endShape(CLOSE);
+    } else {
+      // 이미지가 없는 경우 기본 색상으로 채우기
+      fill(255, 0, 0);
+      beginShape();
+      eachBody.vertices.forEach((vertex) => {
+        vertex(
+          ((vertex.x - pos.x + eachBody.render.sprite.xOffset) /
+            originalWidth) *
+            width,
+          ((vertex.y - pos.y + eachBody.render.sprite.yOffset) /
+            originalHeight) *
+            height
+        );
+      });
+      endShape(CLOSE);
+    }
+
+    pop();
   });
 }
-
-// // create renderer
-// const elem = document.querySelector('#canvas');
-// var render = Render.create({
-//   element: elem,
-//   engine: engine,
-//   options: {
-//     width: 800,
-//     height: 600,
-//     showAngleIndicator: false,
-//     wireframes: false,
-//   },
-// });
-// Render.run(render);
