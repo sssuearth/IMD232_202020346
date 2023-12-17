@@ -28,25 +28,35 @@ const originalWidth = 1080; //1080 //800
 const originalHeight = 720; //720 //600
 
 // 이미지 로드할 변수 선언
-let boxImage;
-let ballImages = [];
+let boxImages1 = [];
+let ballImages2 = [];
+
+// 현재까지 몇 번째 이미지를 선택했는지 추적하는 변수
+let boxImageIndex = 0;
+let ballImageIndex = 0;
 
 // preload 함수에서 이미지 로드
 function preload() {
-  boxImage = loadImage('./3dpng/0-63.png');
+  for (let i = 4; i <= 8; i++) {
+    // 5개의 다른 이미지를 불러와 배열에 추가
+    boxImages1.push(loadImage(`./3dpng/0-${i}.png`));
+  }
+
   for (let i = 53; i <= 57; i++) {
     // 5개의 다른 이미지를 불러와 배열에 추가
-    ballImages.push(loadImage(`./3dpng/0-${i}.png`));
+    ballImages2.push(loadImage(`./3dpng/0-${i}.png`));
   }
+
+  // 이미지 배열 랜덤 셔플
+  shuffleArray(boxImages1);
+  shuffleArray(ballImages2);
 }
 
-// 배열 섞기
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-  return array;
 }
 
 function setup() {
@@ -60,7 +70,7 @@ function setup() {
   //위
   walls.push(Bodies.rectangle(540, 0, 1080, 10, { isStatic: true }));
   //아래
-  walls.push(Bodies.rectangle(540, 720, 1080, 10, { isStatic: true }));
+  walls.push(Bodies.rectangle(540, 600, 1080, 10, { isStatic: true }));
   //오른쪽
   walls.push(Bodies.rectangle(1080, 360, 10, 720, { isStatic: true }));
   //왼쪽
@@ -72,13 +82,13 @@ function setup() {
   stack = Composite.create();
 
   // 생성할 사각형 및 원의 갯수 설정
-  const numRectangles = 5;
-  const numCircles = 5;
+  const numRectangles1 = 5;
+  const numRectangles2 = 5;
 
-  // 사각형 추가
-  for (let i = 0; i < numRectangles; i++) {
-    const x = 100 + i * 20; // x 위치를 고정
-    const y = 200; // y 위치를 조절하여 10씩 차이 나게 설정
+  //1줄
+  for (let i = 0; i < numRectangles1; i++) {
+    const x = 200 + i * 150; // x 위치를 고정
+    const y = 50;
 
     Composite.add(
       stack,
@@ -86,35 +96,33 @@ function setup() {
         render: {
           strokeStyle: '#ffffff',
           sprite: {
-            texture: boxImage,
+            texture: boxImages1[boxImageIndex % boxImages1.length], // 중복을 방지하기 위해 배열 크기로 나눔
           },
         },
       })
     );
+
+    boxImageIndex++;
   }
 
-  // 원 추가
-  const shuffledImages = shuffleArray([...ballImages]); // 이미지 배열 복사 후 섞기
-  for (let i = 0; i < numCircles; i++) {
+  //2줄
+  for (let i = 0; i < numRectangles2; i++) {
     const x = 200 + i * 15; // x 위치를 고정
-    const y = 100; // y 위치를 조절하여 15씩 차이 나게 설정
-
-    const randomBallImage = shuffledImages[i];
+    const y = 300; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
       stack,
-      Bodies.circle(x, y, 46, {
-        density: 0.0005,
-        frictionAir: 0.06,
-        restitution: 0.3,
-        friction: 0.01,
+      Bodies.rectangle(x, y, 80, 80, {
         render: {
+          strokeStyle: '#ffffff',
           sprite: {
-            texture: randomBallImage,
+            texture: ballImages2[ballImageIndex % ballImages2.length], // 중복을 방지하기 위해 배열 크기로 나눔
           },
         },
       })
     );
+
+    ballImageIndex++;
   }
 
   // 만든 바디를 세계에 추가
