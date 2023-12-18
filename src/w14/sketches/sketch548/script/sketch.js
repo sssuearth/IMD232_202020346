@@ -39,6 +39,8 @@ let box7Images = [];
 let box8Images = [];
 let box9Images = [];
 let box10Images = [];
+let box11Images = [];
+let box12Images = [];
 
 // 현재까지 몇 번째 이미지를 선택했는지 추적하는 변수
 let box1ImageIndex1 = 0;
@@ -51,6 +53,8 @@ let box7ImageIndex7 = 0;
 let box8ImageIndex8 = 0;
 let box9ImageIndex9 = 0;
 let box10ImageIndex10 = 0;
+let box11ImageIndex11 = 0;
+let box12ImageIndex12 = 0;
 
 // preload 함수에서 이미지 로드
 function preload() {
@@ -94,6 +98,14 @@ function preload() {
   for (let i = 65; i <= 66; i++) {
     box10Images.push(loadImage(`./3dpng/0-${i}.png`));
   }
+  //11번 눈금박스
+  for (let i = 67; i <= 68; i++) {
+    box11Images.push(loadImage(`./3dpng/0-${i}.png`));
+  }
+  //12번 글자들
+  for (let i = 1; i <= 9; i++) {
+    box12Images.push(loadImage(`./3dpng/1-${i}.png`));
+  }
 
   // 이미지 배열 랜덤 셔플
   shuffleArray(box1Images);
@@ -106,6 +118,8 @@ function preload() {
   shuffleArray(box8Images);
   shuffleArray(box9Images);
   shuffleArray(box10Images);
+  shuffleArray(box11Images);
+  shuffleArray(box12Images);
 }
 
 function shuffleArray(array) {
@@ -148,8 +162,49 @@ function setup() {
   const numRectangles8 = 7;
   const numRectangles9 = 6;
   const numRectangles10 = 2;
+  const numRectangles11 = 1;
+  const numRectangles12 = 9;
 
   //사각형에 이미지 넣기
+
+  //11번 눈금박스 2개 //맨뒤
+  for (let i = 0; i < numRectangles11; i++) {
+    const x = 805 + i * 1; // x 위치를 고정
+    const y = 435; // y 위치를 조절하여 15씩 차이 나게 설정
+
+    Composite.add(
+      stack,
+      Bodies.rectangle(x, y, 30, 30, {
+        isStatic: true,
+        render: {
+          sprite: {
+            texture: box11Images[box11ImageIndex11 % box11Images.length],
+          },
+        },
+      })
+    );
+
+    box11ImageIndex11++;
+  }
+  //12번 글자박스 9개 //맨뒤
+  for (let i = 0; i < numRectangles12; i++) {
+    const x = 50; // x 위치를 고정
+    const y = 100 + i * 68; // y 위치를 조절하여 15씩 차이 나게 설정
+
+    Composite.add(
+      stack,
+      Bodies.rectangle(x, y, 30, 30, {
+        isStatic: true,
+        render: {
+          sprite: {
+            texture: box12Images[box12ImageIndex12 % box12Images.length],
+          },
+        },
+      })
+    );
+
+    box12ImageIndex12++;
+  }
 
   //1줄 5개
   for (let i = 0; i < numRectangles1; i++) {
@@ -315,7 +370,7 @@ function setup() {
   }
   //10번 컬러박스 2개
   for (let i = 0; i < numRectangles10; i++) {
-    const x = 100 + i * 94; // x 위치를 고정
+    const x = 125 + i * 94; // x 위치를 고정
     const y = 570; // y 위치를 조절하여 15씩 차이 나게 설정
 
     Composite.add(
@@ -324,7 +379,7 @@ function setup() {
         isStatic: true,
         render: {
           sprite: {
-            texture: box10Images[box10ImageIndex10 % box9Images.length], // 중복을 방지하기 위해 배열 크기로 나눔
+            texture: box10Images[box10ImageIndex10 % box10Images.length],
           },
         },
       })
@@ -336,7 +391,7 @@ function setup() {
   // 만든 바디를 세계에 추가
   Composite.add(world, stack);
 
-  // 마우스s
+  // 마우스
   m = Mouse.create(document.querySelector('canvas'));
   m.pixelRatio = (pixelDensity() * width) / originalWidth;
   mc = MouseConstraint.create(engine, {
