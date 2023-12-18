@@ -384,7 +384,7 @@ function setup() {
 function draw() {
   background('white');
   noStroke();
-  fill('red');
+  noFill();
   walls.forEach((eachWall) => {
     beginShape();
     eachWall.vertices.forEach((each) => {
